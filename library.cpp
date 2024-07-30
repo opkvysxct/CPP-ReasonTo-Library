@@ -7,15 +7,15 @@ class ReasonTo {
 public:
 	int anyReasons;
 	std::vector<std::string> specificReasons;
-	bool CanProceed();
+	bool CanProceed() const;
 	void AddAnyReason();
-	void AddSpecificReason(std::string reasonName);
+	void AddSpecificReason(const std::string& reasonName);
 	void RemoveAnyReason();
-	void RemoveSpecificReason(std::string reasonName);
+	void RemoveSpecificReason(const std::string& reasonName);
 };
 
-bool ReasonTo::CanProceed() {
-	if (this->anyReasons == 0 && this->specificReasons.size() == 0) {
+bool ReasonTo::CanProceed() const {
+	if (this->anyReasons == 0 && this->specificReasons.empty()) {
 		return true;
 	}
 	return false;
@@ -29,11 +29,11 @@ void ReasonTo::RemoveAnyReason() {
 	if (this->anyReasons>1)	this->anyReasons--;
 }
 
-void ReasonTo::AddSpecificReason(std::string reasonName) {
+void ReasonTo::AddSpecificReason(const std::string& reasonName) {
 	this->specificReasons.push_back(reasonName);
 }
 
-void ReasonTo::RemoveSpecificReason(std::string reasonName) {
+void ReasonTo::RemoveSpecificReason(const std::string& reasonName) {
 	this->specificReasons.erase(std::find(
 			this->specificReasons.begin(),
 			this->specificReasons.end(),
