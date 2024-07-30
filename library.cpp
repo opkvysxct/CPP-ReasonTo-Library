@@ -12,8 +12,6 @@ public:
 	void AddSpecificReason(std::string reasonName);
 	void RemoveAnyReason();
 	void RemoveSpecificReason(std::string reasonName);
-	ReasonTo();
-	~ReasonTo();
 };
 
 bool ReasonTo::CanProceed() {
