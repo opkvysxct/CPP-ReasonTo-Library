@@ -7,11 +7,12 @@ class ReasonTo {
 public:
 	int anyReasons;
 	std::vector<std::string> specificReasons;
-	bool CanProceed() const;
+	[[nodiscard]] bool CanProceed() const;
 	void AddAnyReason();
 	void AddSpecificReason(const std::string& reasonName);
 	void RemoveAnyReason();
 	void RemoveSpecificReason(const std::string& reasonName);
+	void Clear();
 };
 
 bool ReasonTo::CanProceed() const {
@@ -38,4 +39,9 @@ void ReasonTo::RemoveSpecificReason(const std::string& reasonName) {
 			this->specificReasons.begin(),
 			this->specificReasons.end(),
 			reasonName));
+}
+
+void ReasonTo::Clear() {
+	this->specificReasons.clear();
+	this->anyReasons = 0;
 }
