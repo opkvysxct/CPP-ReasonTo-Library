@@ -54,17 +54,6 @@ public:
             std::get<std::vector<std::string>>(m_reasons).emplace_back(reasonName);
         }
     }
-
-    virtual inline void removeSpecificReason(std::string_view reasonName) const noexcept {
-        if (std::holds_alternative<std::vector<std::string>>(m_reasons)) {
-            auto& reasons = std::get<std::vector<std::string>>(m_reasons);
-            reasons.erase(std::remove_if(reasons.begin(), reasons.end(),
-                                         [&reasonName](const std::string& str) {
-                                             return str == reasonName;
-                                         }),
-                          reasons.end());
-        }
-    }
     
     virtual inline auto clear() const noexcept -> void {
         m_reasons = std::monostate{};
