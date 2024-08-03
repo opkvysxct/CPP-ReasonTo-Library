@@ -1,5 +1,5 @@
-#ifndef _H_REASON_TO
-#define _H_REASON_TO
+#ifndef H_REASON_TO
+#define H_REASON_TO
 
 #pragma once
 #include <vector>
@@ -52,6 +52,17 @@ public:
             m_reasons = std::vector<std::string>{std::string(reasonName)};
         } else {
             std::get<std::vector<std::string>>(m_reasons).emplace_back(reasonName);
+        }
+    }
+
+    virtual inline void removeSpecificReason(std::string_view reasonName) const noexcept {
+        if (std::holds_alternative<std::vector<std::string>>(m_reasons)) {
+            auto& reasons = std::get<std::vector<std::string>>(m_reasons);
+            reasons.erase(std::remove_if(reasons.begin(), reasons.end(),
+                                         [&reasonName](const std::string& str) {
+                                             return str == reasonName;
+                                         }),
+                          reasons.end());
         }
     }
     
